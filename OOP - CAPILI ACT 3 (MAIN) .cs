@@ -1,3 +1,5 @@
+
+
 using System;
 using System.Collections.Generic;
 
@@ -14,11 +16,16 @@ public class RefreshmentDrinkSystem
 
     public void Run()
     {
+        Console.ForegroundColor = ConsoleColor.Cyan;
         Console.WriteLine("Welcome to the Refreshment Drink System!");
+        Console.ResetColor();
+
         while (true)
         {
             Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("MENU");
+            Console.ResetColor();
             Console.WriteLine("1. Items");
             Console.WriteLine("2. Add");
             Console.WriteLine("3. Clear");
@@ -47,7 +54,9 @@ public class RefreshmentDrinkSystem
                     PurchaseItems();
                     break;
                 case 6:
+                    Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.WriteLine("Thank you for using the Refreshment Drink System!");
+                    Console.ResetColor();
                     return;
             }
         }
@@ -63,15 +72,19 @@ public class RefreshmentDrinkSystem
             {
                 return choice;
             }
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Invalid choice. Please try again.");
+            Console.ResetColor();
             Console.WriteLine();
         }
     }
 
     private void DisplayItems()
     {
+        Console.ForegroundColor = ConsoleColor.Cyan;
         Console.WriteLine("ITEMS");
         Console.WriteLine("-----");
+        Console.ResetColor();
 
         if (Drinks.Count == 0)
         {
@@ -93,42 +106,60 @@ public class RefreshmentDrinkSystem
 
     private void AddItem()
     {
+        Console.ForegroundColor = ConsoleColor.Cyan;
         Console.Write("Enter the name of the drink: ");
+        Console.ResetColor();
         string name = Console.ReadLine();
 
+        Console.ForegroundColor = ConsoleColor.Cyan;
         Console.Write("Enter the price of the drink: ");
+        Console.ResetColor();
         int price = GetValidPositiveNumber();
 
+        Console.ForegroundColor = ConsoleColor.Cyan;
         Console.Write("Is the drink available? (y/n): ");
+        Console.ResetColor();
         bool isAvailable = Console.ReadLine().ToLower() == "y";
 
+        Console.ForegroundColor = ConsoleColor.Cyan;
         Console.Write("Enter the number of drinks available: ");
+        Console.ResetColor();
         int numberOfDrinks = GetValidPositiveNumber();
 
+        Console.ForegroundColor = ConsoleColor.Cyan;
         Console.Write("Enter the description of the drink: ");
+        Console.ResetColor();
         string description = Console.ReadLine();
 
         Drink newDrink = new Drink(name, price, isAvailable, numberOfDrinks, description);
         Drinks.Add(newDrink);
 
+        Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("Drink added successfully.");
+        Console.ResetColor();
     }
 
     private void ClearItems()
     {
         Drinks.Clear();
+        Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("All drinks have been cleared.");
+        Console.ResetColor();
     }
 
     private void RemoveItem()
     {
         if (Drinks.Count == 0)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("No drinks available to remove.");
+            Console.ResetColor();
             return;
         }
 
+        Console.ForegroundColor = ConsoleColor.Cyan;
         Console.WriteLine("Enter the number of the drink to remove:");
+        Console.ResetColor();
 
         for (int i = 0; i < Drinks.Count; i++)
         {
@@ -138,18 +169,24 @@ public class RefreshmentDrinkSystem
         int drinkIndex = GetValidDrinkIndex();
 
         Drinks.RemoveAt(drinkIndex - 1);
+        Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("Drink removed successfully.");
+        Console.ResetColor();
     }
 
     private void PurchaseItems()
     {
         if (Drinks.Count == 0)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("No drinks available to purchase.");
+            Console.ResetColor();
             return;
         }
 
+        Console.ForegroundColor = ConsoleColor.Cyan;
         Console.WriteLine("Enter the number of the drink to purchase:");
+        Console.ResetColor();
 
         for (int i = 0; i < Drinks.Count; i++)
         {
@@ -160,12 +197,16 @@ public class RefreshmentDrinkSystem
 
         Drink selectedDrink = Drinks[drinkIndex - 1];
 
+        Console.ForegroundColor = ConsoleColor.Cyan;
         Console.Write("Enter the quantity to purchase: ");
+        Console.ResetColor();
         int quantity = GetValidPositiveNumber();
 
         if (selectedDrink.NumberOfDrinks < quantity)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Insufficient quantity available.");
+            Console.ResetColor();
             return;
         }
 
@@ -174,7 +215,9 @@ public class RefreshmentDrinkSystem
         OrderedItems.Add(orderedItem);
 
         selectedDrink.NumberOfDrinks -= quantity;
+        Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("Item purchased successfully.");
+        Console.ResetColor();
     }
 
     private int GetValidPositiveNumber()
@@ -186,7 +229,9 @@ public class RefreshmentDrinkSystem
             {
                 return number;
             }
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Invalid input. Please enter a positive number.");
+            Console.ResetColor();
             Console.WriteLine();
         }
     }
@@ -196,12 +241,16 @@ public class RefreshmentDrinkSystem
         int drinkIndex;
         while (true)
         {
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write("Enter the drink number: ");
+            Console.ResetColor();
             if (int.TryParse(Console.ReadLine(), out drinkIndex) && drinkIndex >= 1 && drinkIndex <= Drinks.Count)
             {
                 return drinkIndex;
             }
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Invalid drink number. Please try again.");
+            Console.ResetColor();
             Console.WriteLine();
         }
     }
@@ -241,10 +290,9 @@ public class OrderedItem
 
 public class Program
 {
-    public static void Main(string[] args)
+    public static void Main()
     {
         RefreshmentDrinkSystem system = new RefreshmentDrinkSystem();
-        system.AddRefreshmentList();
         system.Run();
     }
 }
