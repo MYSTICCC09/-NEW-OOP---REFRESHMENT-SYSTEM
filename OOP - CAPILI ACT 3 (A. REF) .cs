@@ -1,3 +1,6 @@
+// Submitted by: Andrei N. Capili BSCPE 1-1 (PUP - BC) //
+// ACTIVITY #3 - Object Oriented Programming //
+
 public void Run()
 {
     Console.WriteLine("Welcome to the Refreshment Drink System!");
