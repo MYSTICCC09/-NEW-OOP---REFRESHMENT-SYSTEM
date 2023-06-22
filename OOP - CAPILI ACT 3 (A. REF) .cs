@@ -34,3 +34,9 @@ private void AddRefreshment(string name, int price)
     Drink drink = new Drink(name, price, true, 0, "");
     Drinks.Add(drink);
 }
+
+public void AddRefreshment(string name, int price)
+{
+    Drink drink = new Drink(name, price, true, 0, "");
+    Drinks.Add(drink);
+}
