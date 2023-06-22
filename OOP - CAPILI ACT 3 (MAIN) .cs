@@ -26,7 +26,7 @@ namespace RefreshmentDrinkSystem
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("==============================");
-                Console.WriteLine(" Welcome to Andrei's Refreshment Drink System >_< ");
+                Console.WriteLine(" Welcome to Andrei's Refreshment Drink System ");
                 Console.WriteLine("==============================");
                 Console.ResetColor();
 
