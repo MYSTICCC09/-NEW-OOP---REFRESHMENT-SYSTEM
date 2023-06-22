@@ -8,11 +8,13 @@ public class RefreshmentDrinkSystem
 {
     public List<Drink> Drinks { get; private set; }
     public List<OrderedItem> OrderedItems { get; private set; }
+    public Wallet Wallet { get; private set; }
 
     public RefreshmentDrinkSystem()
     {
         Drinks = new List<Drink>();
         OrderedItems = new List<OrderedItem>();
+        Wallet = new Wallet(100); // Initialize wallet with initial amount of 100 cents
     }
 
     public void Run()
@@ -32,7 +34,8 @@ public class RefreshmentDrinkSystem
             Console.WriteLine("3. Clear");
             Console.WriteLine("4. Remove");
             Console.WriteLine("5. Purchase");
-            Console.WriteLine("6. Exit");
+            Console.WriteLine("6. Wallet");
+            Console.WriteLine("7. Exit");
             Console.WriteLine();
 
             int choice = GetValidChoice();
@@ -55,6 +58,9 @@ public class RefreshmentDrinkSystem
                     PurchaseItems();
                     break;
                 case 6:
+                    DisplayWallet();
+                    break;
+                case 7:
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.WriteLine("Thank you for using the Refreshment Drink System!");
                     Console.ResetColor();
@@ -69,7 +75,7 @@ public class RefreshmentDrinkSystem
         while (true)
         {
             Console.Write("Enter your choice: ");
-            if (int.TryParse(Console.ReadLine(), out choice) && choice >= 1 && choice <= 6)
+            if (int.TryParse(Console.ReadLine(), out choice) && choice >= 1 && choice <= 7)
             {
                 return choice;
             }
@@ -96,7 +102,7 @@ public class RefreshmentDrinkSystem
             foreach (Drink drink in Drinks)
             {
                 Console.WriteLine(drink.Name);
-                Console.WriteLine("Price: " + drink.Price + " cents");
+                Console.WriteLine("Price: " + drink.Price.Format());
                 Console.WriteLine("Availability: " + (drink.IsAvailable ? "Available" : "Not available"));
                 Console.WriteLine("Number of drinks: " + drink.NumberOfDrinks);
                 Console.WriteLine("Description: " + drink.Description);
@@ -132,7 +138,7 @@ public class RefreshmentDrinkSystem
         Console.ResetColor();
         string description = Console.ReadLine();
 
-        Drink newDrink = new Drink(name, price, isAvailable, numberOfDrinks, description);
+        Drink newDrink = new Drink(name, new Currency(price), isAvailable, numberOfDrinks, description);
         Drinks.Add(newDrink);
 
         Console.ForegroundColor = ConsoleColor.Green;
@@ -211,11 +217,22 @@ public class RefreshmentDrinkSystem
             return;
         }
 
-        int totalPrice = selectedDrink.Price * quantity;
-        OrderedItem orderedItem = new OrderedItem(selectedDrink.Name, quantity, totalPrice);
+        Currency totalPrice = selectedDrink.Price * quantity;
+
+        if (totalPrice > Wallet.Balance)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Insufficient funds in the wallet.");
+            Console.ResetColor();
+            return;
+        }
+
+        OrderedItem orderedItem = new OrderedItem(selectedDrink.Name, quantity, totalPrice.Amount);
         OrderedItems.Add(orderedItem);
 
         selectedDrink.NumberOfDrinks -= quantity;
+        Wallet.Subtract(totalPrice);
+
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("Item purchased successfully.");
         Console.ResetColor();
@@ -255,17 +272,97 @@ public class RefreshmentDrinkSystem
             Console.WriteLine();
         }
     }
+
+    private void DisplayWallet()
+    {
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine("WALLET");
+        Console.WriteLine("------");
+        Console.ResetColor();
+
+        Console.WriteLine("Balance: " + Wallet.Balance.Format());
+    }
+}
+
+public class Currency
+{
+    public int Amount { get; private set; }
+
+    public Currency(int amount)
+    {
+        Amount = amount;
+    }
+
+    public static Currency operator +(Currency c1, Currency c2)
+    {
+        return new Currency(c1.Amount + c2.Amount);
+    }
+
+    public static Currency operator -(Currency c1, Currency c2)
+    {
+        return new Currency(c1.Amount - c2.Amount);
+    }
+
+    public static bool operator <(Currency c1, Currency c2)
+    {
+        return c1.Amount < c2.Amount;
+    }
+
+    public static bool operator >(Currency c1, Currency c2)
+    {
+        return c1.Amount > c2.Amount;
+    }
+
+    public static bool operator <=(Currency c1, Currency c2)
+    {
+        return c1.Amount <= c2.Amount;
+    }
+
+    public static bool operator >=(Currency c1, Currency c2)
+    {
+        return c1.Amount >= c2.Amount;
+    }
+
+    public static Currency operator *(Currency c, int multiplier)
+    {
+        return new Currency(c.Amount * multiplier);
+    }
+
+    public string Format()
+    {
+        return "$" + (Amount / 100) + "." + (Amount % 100).ToString("00");
+    }
+}
+
+public class Wallet
+{
+    public Currency Balance { get; private set; }
+
+    public Wallet(int initialAmount)
+    {
+        Balance = new Currency(initialAmount);
+    }
+
+    public void Add(Currency amount)
+    {
+        Balance += amount;
+    }
+
+    public void Subtract(Currency amount)
+    {
+        Balance -= amount;
+    }
 }
 
 public class Drink
 {
     public string Name { get; private set; }
-    public int Price { get; private set; }
-    public bool IsAvailable { get; set; }
+    public Currency Price { get; private set; }
+    public bool IsAvailable { get; private set; }
     public int NumberOfDrinks { get; set; }
     public string Description { get; private set; }
 
-    public Drink(string name, int price, bool isAvailable, int numberOfDrinks, string description)
+    public Drink(string name, Currency price, bool isAvailable, int numberOfDrinks, string description)
     {
         Name = name;
         Price = price;
@@ -289,7 +386,7 @@ public class OrderedItem
     }
 }
 
-public class Program
+public static class Program
 {
     public static void Main()
     {
