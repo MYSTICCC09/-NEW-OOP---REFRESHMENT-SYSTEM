@@ -1,6 +1,8 @@
 // Submitted by: Andrei N. Capili BSCPE 1-1 (PUP - BC) //
 // ACTIVITY #3 - Object Oriented Programming //
 
+// Good day ma'am, this is the section po for directives or assembly reference na code po //
+
 using System;
 using System.Collections.Generic;
 
@@ -10,22 +12,22 @@ namespace RefreshmentDrinkSystem
 
     public class RefreshmentDrinkSystem
     {
-        // Rest of your code
+        // PLEASE REFER TO MAIN.CS PROGRAM
     }
 
     public class Drink
     {
-        // Rest of your code
+        // PLEASE REFER TO MAIN.CS PROGRAM
     }
 
     public class OrderedItem
     {
-        // Rest of your code
+        // PLEASE REFER TO MAIN.CS PROGRAM
     }
 
     public class Wallet
     {
-        // Rest of your code
+        // PLEASE REFER TO MAIN.CS PROGRAM
     }
 
     class Program
