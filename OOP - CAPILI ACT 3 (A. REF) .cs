@@ -6,36 +6,40 @@
 using System;
 using System.Collections.Generic;
 
+class Program
+{
+    static void Main(string[] args)
+    {
+        RefreshmentDrinkSystem drinkSystem = new RefreshmentDrinkSystem();
+        drinkSystem.Run();
+    }
+}
+
 namespace RefreshmentDrinkSystem
 {
     using System.Linq;
 
     public class RefreshmentDrinkSystem
     {
-        // PLEASE REFER TO MAIN.CS PROGRAM
+        // Rest of the code for the RefreshmentDrinkSystem class
+        // ...
     }
 
     public class Drink
     {
-        // PLEASE REFER TO MAIN.CS PROGRAM
+        // Rest of the code for the Drink class
+        // ...
     }
 
     public class OrderedItem
     {
-        // PLEASE REFER TO MAIN.CS PROGRAM
+        // Rest of the code for the OrderedItem class
+        // ...
     }
 
     public class Wallet
     {
-        // PLEASE REFER TO MAIN.CS PROGRAM
-    }
-
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            RefreshmentDrinkSystem drinkSystem = new RefreshmentDrinkSystem();
-            drinkSystem.Run();
-        }
+        // Rest of the code for the Wallet class
+        // ...
     }
 }
