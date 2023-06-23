@@ -6,6 +6,15 @@ using System.Collections.Generic;
 
 namespace RefreshmentDrinkSystem
 {
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            RefreshmentDrinkSystem drinkSystem = new RefreshmentDrinkSystem();
+            drinkSystem.Run();
+        }
+    }
+
     public class RefreshmentDrinkSystem
     {
         private List<Drink> Drinks { get; }
@@ -367,14 +376,4 @@ namespace RefreshmentDrinkSystem
             Balance -= amount;
         }
     }
-
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            RefreshmentDrinkSystem drinkSystem = new RefreshmentDrinkSystem();
-            drinkSystem.Run();
-        }
-    }
 }
-
