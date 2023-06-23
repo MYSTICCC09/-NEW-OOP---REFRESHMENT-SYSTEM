@@ -1,2 +1,5 @@
 # -NEW-OOP---REFRESHMENT-SYSTEM
-OBJECT ORIENTED PROGRAMMING REPOSITORY AS PER REQUESTED BY PROF. INDALEEN QUINSAYAS. THIS REFRESHMENT SYSTEM FUNCTIONS LIKE A VENDING MACHINE THAT ONLY OFFERS DRINKS. LET'S STAY HYDRATED, AND WE TRAVEL THIS PATH TOGETHER.
+
+OBJECT ORIENTED PROGRAMMING REPOSITORY AS PER REQUESTED BY PROF. INDALEEN QUINSAYAS. THIS REFRESHMENT SYSTEM program serves the purpose of offering customers a convenient and automated way to purchase refreshments or beverages. These systems provide self-service convenience, allowing customers to select, pay for, and receive their items without the need for human assistance. With 24/7 availability, vending machines ensure that refreshments are accessible at any time, catering to customer needs even during non-business hours or in locations with limited food options.
+
+The purpose of a vending machine or refreshment system program is to offer customers a convenient and accessible means to purchase refreshments, providing self-service convenience, a wide range of choices, quick transactions, and 24/7 availability. These systems generate revenue while reducing operational costs for businesses and come with monitoring and maintenance features for efficient operation.
