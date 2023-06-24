@@ -1,25 +1,13 @@
-// Submitted by: Andrei N. Capili BSCPE 1-1 (PUP - BC) //
-// ACTIVITY #3 - Object Oriented Programming //
-
 using System;
 using System.Collections.Generic;
 
-namespace RefreshmentDrinkSystem
+namespace RefeshmentDrinkSystem
 {
-    internal class Program
-    {
-        static void Main(string[] args)
-        {
-            RefreshmentDrinkSystem drinkSystem = new RefreshmentDrinkSystem();
-            drinkSystem.Run();
-        }
-    }
-
     public class RefreshmentDrinkSystem
     {
-        private List<Drink> Drinks { get; }
-        private List<OrderedItem> OrderedItems { get; }
-        private Wallet Wallet { get; }
+        public List<Drink> Drinks { get; }
+        public List<OrderedItem> OrderedItems { get; }
+        public Wallet Wallet { get; }
 
         public RefreshmentDrinkSystem()
         {
@@ -27,8 +15,67 @@ namespace RefreshmentDrinkSystem
             OrderedItems = new List<OrderedItem>();
             Wallet = new Wallet(0);
         }
+    }
 
-        public void Run()
+    public class Drink
+    {
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+        public bool IsAvailable { get; set; }
+        public int NumberOfDrinks { get; set; }
+        public string Description { get; set; }
+
+        public Drink(string name, decimal price, bool isAvailable, int numberOfDrinks, string description)
+        {
+            Name = name;
+            Price = price;
+            IsAvailable = isAvailable;
+            NumberOfDrinks = numberOfDrinks;
+            Description = description;
+        }
+    }
+
+    public class OrderedItem
+    {
+        public string Name { get; }
+        public int Quantity { get; }
+        public decimal TotalPrice { get; }
+
+        public OrderedItem(string name, int quantity, decimal totalPrice)
+        {
+            Name = name;
+            Quantity = quantity;
+            TotalPrice = totalPrice;
+        }
+    }
+
+    public class Wallet
+    {
+        public decimal Balance { get; set; }
+
+        public Wallet(decimal initialBalance)
+        {
+            Balance = initialBalance;
+        }
+
+        public decimal Add(decimal amount)
+        {
+            Balance += amount;
+            return Balance;
+        }
+
+        public decimal Deduct(decimal amount)
+        {
+            Balance -= amount;
+            return Balance;
+        }
+    }
+
+    class Program
+    {
+        static RefreshmentDrinkSystem drinkSystem = new RefreshmentDrinkSystem();
+
+        static void Main(string[] args)
         {
             bool exit = false;
             while (!exit)
@@ -53,7 +100,7 @@ namespace RefreshmentDrinkSystem
                 Console.Write("Enter your choice: ");
                 Console.ResetColor();
 
-                string choice = Console.ReadLine();
+                string choice = Console.ReadLine() ?? string.Empty;
 
                 Console.WriteLine();
 
@@ -94,12 +141,12 @@ namespace RefreshmentDrinkSystem
             }
         }
 
-        private void AddDrink()
+        static void AddDrink()
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write("Enter the name of the drink: ");
             Console.ResetColor();
-            string name = Console.ReadLine();
+            string name = Console.ReadLine() ?? string.Empty;
 
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write("Enter the price of the drink: ");
@@ -119,27 +166,27 @@ namespace RefreshmentDrinkSystem
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write("Enter the description of the drink: ");
             Console.ResetColor();
-            string description = Console.ReadLine();
+            string description = Console.ReadLine() ?? string.Empty;
 
             Drink newDrink = new Drink(name, price, isAvailable, numberOfDrinks, description);
-            Drinks.Add(newDrink);
+            drinkSystem.Drinks.Add(newDrink);
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Drink added successfully.");
             Console.ResetColor();
         }
 
-        private void ClearItems()
+        static void ClearItems()
         {
-            Drinks.Clear();
+            drinkSystem.Drinks.Clear();
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("All drinks have been cleared.");
             Console.ResetColor();
         }
 
-        private void RemoveItem()
+        static void RemoveItem()
         {
-            if (Drinks.Count == 0)
+            if (drinkSystem.Drinks.Count == 0)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("No drinks available to remove.");
@@ -150,15 +197,15 @@ namespace RefreshmentDrinkSystem
             ViewDrinks();
             int drinkIndex = GetValidDrinkIndex();
 
-            Drinks.RemoveAt(drinkIndex - 1);
+            drinkSystem.Drinks.RemoveAt(drinkIndex - 1);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Drink removed successfully.");
             Console.ResetColor();
         }
 
-        private void ViewDrinks()
+        static void ViewDrinks()
         {
-            if (Drinks.Count == 0)
+            if (drinkSystem.Drinks.Count == 0)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("No drinks available.");
@@ -170,21 +217,21 @@ namespace RefreshmentDrinkSystem
             Console.WriteLine("======= Drinks =======");
             Console.ResetColor();
 
-            for (int i = 0; i < Drinks.Count; i++)
+            for (int i = 0; i < drinkSystem.Drinks.Count; i++)
             {
                 Console.WriteLine($"Drink {i + 1}:");
-                Console.WriteLine($"Name: {Drinks[i].Name}");
-                Console.WriteLine($"Price: {Drinks[i].Price:C}");
-                Console.WriteLine($"Availability: {(Drinks[i].IsAvailable ? "Available" : "Not Available")}");
-                Console.WriteLine($"Number of Drinks: {Drinks[i].NumberOfDrinks}");
-                Console.WriteLine($"Description: {Drinks[i].Description}");
+                Console.WriteLine($"Name: {drinkSystem.Drinks[i].Name}");
+                Console.WriteLine($"Price: {drinkSystem.Drinks[i].Price:C}");
+                Console.WriteLine($"Availability: {(drinkSystem.Drinks[i].IsAvailable ? "Available" : "Not Available")}");
+                Console.WriteLine($"Number of Drinks: {drinkSystem.Drinks[i].NumberOfDrinks}");
+                Console.WriteLine($"Description: {drinkSystem.Drinks[i].Description}");
                 Console.WriteLine();
             }
         }
 
-        private void PurchaseItems()
+        static void PurchaseItems()
         {
-            if (Drinks.Count == 0)
+            if (drinkSystem.Drinks.Count == 0)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("No drinks available for purchase.");
@@ -194,7 +241,7 @@ namespace RefreshmentDrinkSystem
 
             ViewDrinks();
             int drinkIndex = GetValidDrinkIndex();
-            Drink selectedDrink = Drinks[drinkIndex - 1];
+            Drink selectedDrink = drinkSystem.Drinks[drinkIndex - 1];
 
             if (!selectedDrink.IsAvailable || selectedDrink.NumberOfDrinks == 0)
             {
@@ -219,7 +266,7 @@ namespace RefreshmentDrinkSystem
 
             decimal totalCost = selectedDrink.Price * quantity;
 
-            if (totalCost > Wallet.Balance)
+            if (totalCost > drinkSystem.Wallet.Balance)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Insufficient balance in the wallet.");
@@ -228,19 +275,19 @@ namespace RefreshmentDrinkSystem
             }
 
             selectedDrink.NumberOfDrinks -= quantity;
-            Wallet.Deduct(totalCost);
+            drinkSystem.Wallet.Deduct(totalCost);
 
             OrderedItem orderedItem = new OrderedItem(selectedDrink.Name, quantity, totalCost);
-            OrderedItems.Add(orderedItem);
+            drinkSystem.OrderedItems.Add(orderedItem);
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Purchase successful.");
             Console.ResetColor();
         }
 
-        private void ViewOrderedItems()
+        static void ViewOrderedItems()
         {
-            if (OrderedItems.Count == 0)
+            if (drinkSystem.OrderedItems.Count == 0)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("No items ordered.");
@@ -252,31 +299,31 @@ namespace RefreshmentDrinkSystem
             Console.WriteLine("======= Ordered Items =======");
             Console.ResetColor();
 
-            for (int i = 0; i < OrderedItems.Count; i++)
+            for (int i = 0; i < drinkSystem.OrderedItems.Count; i++)
             {
                 Console.WriteLine($"Item {i + 1}:");
-                Console.WriteLine($"Name: {OrderedItems[i].Name}");
-                Console.WriteLine($"Quantity: {OrderedItems[i].Quantity}");
-                Console.WriteLine($"Total Price: {OrderedItems[i].TotalPrice:C}");
+                Console.WriteLine($"Name: {drinkSystem.OrderedItems[i].Name}");
+                Console.WriteLine($"Quantity: {drinkSystem.OrderedItems[i].Quantity}");
+                Console.WriteLine($"Total Price: {drinkSystem.OrderedItems[i].TotalPrice:C}");
                 Console.WriteLine();
             }
         }
 
-        private void AddMoneyToWallet()
+        static void AddMoneyToWallet()
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write("Enter the amount to add to the wallet: ");
             Console.ResetColor();
             decimal amount = GetValidPositiveNumber();
 
-            Wallet.Add(amount);
+            drinkSystem.Wallet.Add(amount);
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Amount added to the wallet successfully.");
             Console.ResetColor();
         }
 
-        private int GetValidPositiveInteger()
+        static int GetValidPositiveInteger()
         {
             int number;
             while (!int.TryParse(Console.ReadLine(), out number) || number <= 0)
@@ -288,7 +335,7 @@ namespace RefreshmentDrinkSystem
             return number;
         }
 
-        private decimal GetValidPositiveNumber()
+        static decimal GetValidPositiveNumber()
         {
             decimal number;
             while (!decimal.TryParse(Console.ReadLine(), out number) || number <= 0)
@@ -300,7 +347,7 @@ namespace RefreshmentDrinkSystem
             return number;
         }
 
-        private bool GetValidBoolean()
+        static bool GetValidBoolean()
         {
             bool value;
             while (!bool.TryParse(Console.ReadLine(), out value))
@@ -312,10 +359,10 @@ namespace RefreshmentDrinkSystem
             return value;
         }
 
-        private int GetValidDrinkIndex()
+        static int GetValidDrinkIndex()
         {
             int index;
-            while (!int.TryParse(Console.ReadLine(), out index) || index <= 0 || index > Drinks.Count)
+            while (!int.TryParse(Console.ReadLine(), out index) || index <= 0 || index > drinkSystem.Drinks.Count)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Invalid input. Please enter a valid drink index.");
@@ -325,56 +372,4 @@ namespace RefreshmentDrinkSystem
         }
     }
 
-    public class Drink
-    {
-        public string Name { get; set; }
-        public decimal Price { get; set; }
-        public bool IsAvailable { get; set; }
-        public int NumberOfDrinks { get; set; }
-        public string Description { get; set; }
-
-        public Drink(string name, decimal price, bool isAvailable, int numberOfDrinks, string description)
-        {
-            Name = name;
-            Price = price;
-            IsAvailable = isAvailable;
-            NumberOfDrinks = numberOfDrinks;
-            Description = description;
-        }
-    }
-
-    public class OrderedItem
-    {
-        public string Name { get; }
-        public int Quantity { get; }
-        public decimal TotalPrice { get; }
-
-        public OrderedItem(string name, int quantity, decimal totalPrice)
-        {
-            Name = name;
-            Quantity = quantity;
-            TotalPrice = totalPrice;
-        }
-    }
-
-    public class Wallet
-    {
-        public decimal Balance { get; private set; }
-
-        public Wallet(decimal initialBalance)
-        {
-            Balance = initialBalance;
-        }
-
-        public void Add(decimal amount)
-        {
-            Balance += amount;
-        }
-
-        public void Deduct(decimal amount)
-        {
-            Balance -= amount;
-        }
-    }
 }
-
