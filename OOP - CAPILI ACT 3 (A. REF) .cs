@@ -1,12 +1,11 @@
-// NOTE: PLEASE PROCEED TO THE NEXT .CS FILE PO, THANK YOU! // 
-
 // Submitted by: Andrei N. Capili BSCPE 1-1 (PUP - BC) //
-// ACTIVITY #3 - Object Oriented Programming //
+// ACTIVITY #3 - Object Oriented Programming          //
+// FINAL PROJECT - MAIN CS. OOP REQUIREMENT          //
 
 using System;
 using System.Collections.Generic;
 
-namespace VendingMachine
+namespace RefreshmentDrinkSystem
 {
     class Program
     {
@@ -18,9 +17,9 @@ namespace VendingMachine
             CreateDummyData();
 
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("==============================================");
-            Console.WriteLine("    Welcome to Andrei's Refreshment Drink System    ");
-            Console.WriteLine("==============================================");
+            Console.WriteLine("============================================================");
+            Console.WriteLine("       Welcome to Andrei's Refreshment Drink System    ");
+            Console.WriteLine("============================================================");
             Console.ResetColor();
 
             Console.WriteLine("1. Display Inventory");
@@ -61,7 +60,7 @@ namespace VendingMachine
         {
             List<Drink> drinks = vendingMachine.GetDrinks();
 
-            Console.WriteLine("\n==========================================================");
+            Console.WriteLine("\n============================================================");
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("                         INVENTORY");
             Console.ResetColor();
@@ -73,7 +72,7 @@ namespace VendingMachine
             Console.ResetColor();
 
             Console.WriteLine("============================================================");
-            Console.WriteLine("      NAME                TYPE            QUANTITY");
+            Console.WriteLine("      NAME                TYPE           QUANTITY");
             Console.WriteLine("------------------------------------------------------------");
 
             foreach (Drink drink in drinks)
