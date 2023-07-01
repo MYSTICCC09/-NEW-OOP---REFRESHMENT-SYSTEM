@@ -1,4 +1,4 @@
-using System;
+ using System;
 using System.Collections.Generic;
 
 namespace VendingMachine
@@ -56,13 +56,20 @@ namespace VendingMachine
         {
             List<Product> inventory = vendingMachine.GetInventory();
 
-            Console.WriteLine("\n===============================================");
+            Console.WriteLine("\n==========================================================");
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("                INVENTORY");
+            Console.WriteLine("                    INVENTORY");
             Console.ResetColor();
-            Console.WriteLine("===============================================");
-            Console.WriteLine("NAME         QUANTITY");
-            Console.WriteLine("-----------------------------------------------");
+            
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("============================================================");
+            Console.WriteLine("   Good day sir!, eto po yung ating mga inumin na available ");
+            Console.WriteLine("============================================================");
+            Console.ResetColor();
+            
+            Console.WriteLine("============================================================");
+            Console.WriteLine("NAME                       ll                  QUANTITY");
+            Console.WriteLine("------------------------------------------------------------");
 
             foreach (Product product in inventory)
             {
@@ -130,9 +137,26 @@ namespace VendingMachine
 
         static void CreateDummyData()
         {
-            vendingMachine.AddProduct(new Product("Coke", 2, 1.50m));
-            vendingMachine.AddProduct(new Product("Chips", 5, 0.75m));
-            vendingMachine.AddProduct(new Product("Candy", 10, 0.50m));
+            
+    vendingMachine.AddProduct(new Product("Tropical Tango-Mango Juice",/*=============================*/                                 75, 2.50m));
+    vendingMachine.AddProduct(new Product("Iced honey-blended calamansi Juice",/*=============================*/                              50, 1.75m));
+    vendingMachine.AddProduct(new Product("Regular Water",/*=============================*/                                                 25, 0.50m));
+    vendingMachine.AddProduct(new Product("Lemonade",/*=============================*/                                                    90, 1.25m));
+    vendingMachine.AddProduct(new Product("Green Tea",/*=============================*/                                                   60, 1.50m));
+    vendingMachine.AddProduct(new Product("Iced Coffee",/*=============================*/                                                  120, 2.00m));
+    vendingMachine.AddProduct(new Product("Strawberry Shake",/*=============================*/                                        85, 2.25m));
+    vendingMachine.AddProduct(new Product("Chocolate Milk",/*=============================*/                                      70, 1.75m));
+    vendingMachine.AddProduct(new Product("Mint Mojito",/*=============================*/                                         70, 1.50m));
+    vendingMachine.AddProduct(new Product("Orange Soda",/*=============================*/                                             80, 1.50m));
+    vendingMachine.AddProduct(new Product("Apple Cider",/*=============================*/                                                 120, 2.25m));
+    vendingMachine.AddProduct(new Product("Pineapple Smoothie",/*=============================*/                                              170, 2.75m));
+    vendingMachine.AddProduct(new Product("Grapefruit Juice",/*=============================*/                                             125, 2.00m));
+    vendingMachine.AddProduct(new Product("Peach Iced Tea",/*=============================*/                                              120, 2.00m));
+    vendingMachine.AddProduct(new Product("Blueberry Lemonade",/*=============================*/                                             130, 2.25m));
+    vendingMachine.AddProduct(new Product("Watermelon Slush",/*=============================*/                                                150, 2.50m));
+    vendingMachine.AddProduct(new Product("Coconut Water",/*=============================*/                                              30, 1.00m));
+    vendingMachine.AddProduct(new Product("Mango Lassi",/*=============================*/                                            200, 3.00m));
+    vendingMachine.AddProduct(new Product("Raspberry Soda",/*=============================*/                                            110, 2.00m));
         }
     }
 
