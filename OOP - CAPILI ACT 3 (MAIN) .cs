@@ -1,4 +1,4 @@
-// NOTE: MAIN CLASS FOR .CS //
+// NOTE: MAIN PROGRAM FOR MY CLASS (Program.cs) //
 
 // Submitted by: Andrei N. Capili BSCPE 1-1 (PUP - BC) //
 // ACTIVITY #3 - Object Oriented Programming //
