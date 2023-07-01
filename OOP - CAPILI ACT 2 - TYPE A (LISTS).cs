@@ -1,3 +1,5 @@
+// NOTE: PLEASE PROCEED TO THE NEXT .CS FILE PO, THANK YOU! // 
+
 // Submitted by: Andrei N. Capili BSCPE 1-1 (PUP - BC) //
 // ACTIVITY #2 - Object Oriented Programming //
 
