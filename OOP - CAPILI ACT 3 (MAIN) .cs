@@ -1,4 +1,4 @@
-// ( dipa po ako tapos kasi unsure po ako kung ilalagay ko yung list ng drinks ulit )
+// NOTE: MAIN CLASS FOR .CS //
 
 // Submitted by: Andrei N. Capili BSCPE 1-1 (PUP - BC) //
 // ACTIVITY #3 - Object Oriented Programming //
