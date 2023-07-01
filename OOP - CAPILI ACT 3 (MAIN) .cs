@@ -23,60 +23,6 @@ namespace RefeshmentDrinkSystem
         }
     }
 
-    public class Drink
-    {
-        public string Name { get; set; }
-        public decimal Price { get; set; }
-        public bool IsAvailable { get; set; }
-        public int NumberOfDrinks { get; set; }
-        public string Description { get; set; }
-
-        public Drink(string name, decimal price, bool isAvailable, int numberOfDrinks, string description)
-        {
-            Name = name;
-            Price = price;
-            IsAvailable = isAvailable;
-            NumberOfDrinks = numberOfDrinks;
-            Description = description;
-        }
-    }
-
-    public class OrderedItem
-    {
-        public string Name { get; }
-        public int Quantity { get; }
-        public decimal TotalPrice { get; }
-
-        public OrderedItem(string name, int quantity, decimal totalPrice)
-        {
-            Name = name;
-            Quantity = quantity;
-            TotalPrice = totalPrice;
-        }
-    }
-
-    public class Wallet
-    {
-        public decimal Balance { get; set; }
-
-        public Wallet(decimal initialBalance)
-        {
-            Balance = initialBalance;
-        }
-
-        public decimal Add(decimal amount)
-        {
-            Balance += amount;
-            return Balance;
-        }
-
-        public decimal Deduct(decimal amount)
-        {
-            Balance -= amount;
-            return Balance;
-        }
-    }
-
     class Program
     {
         static RefreshmentDrinkSystem drinkSystem = new RefreshmentDrinkSystem();
