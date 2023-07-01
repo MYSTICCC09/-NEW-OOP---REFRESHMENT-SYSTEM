@@ -14,7 +14,7 @@ namespace VendingMachine
 
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("==============================================");
-            Console.WriteLine("  Welcome to Andrei's Refreshment Drink System ");
+            Console.WriteLine("    Welcome to Andrei's Refreshment Drink System    ");
             Console.WriteLine("==============================================");
             Console.ResetColor();
 
@@ -47,7 +47,7 @@ namespace VendingMachine
                         break;
                 }
 
-                Console.WriteLine("Enter your choice:");
+                Console.WriteLine("\nEnter your choice:");
                 userInput = GetUserInput();
             }
         }
@@ -56,7 +56,7 @@ namespace VendingMachine
         {
             List<Product> inventory = vendingMachine.GetInventory();
 
-            Console.WriteLine("===============================================");
+            Console.WriteLine("\n===============================================");
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("                INVENTORY");
             Console.ResetColor();
@@ -66,7 +66,7 @@ namespace VendingMachine
 
             foreach (Product product in inventory)
             {
-                Console.WriteLine($"{product.Name}\t\t{product.Quantity}");
+                Console.WriteLine($"{product.Name,-12} {product.Quantity}");
             }
 
             Console.WriteLine("===============================================");
@@ -74,13 +74,13 @@ namespace VendingMachine
 
         private static string GetUserInput()
         {
-            Console.Write("User input > ");
+            Console.Write("\nUser input > ");
             return Console.ReadLine();
         }
 
         private static void Purchase()
         {
-            Console.Write("Enter the item you want to buy: ");
+            Console.Write("\nEnter the item you want to buy: ");
             string itemName = GetUserInput();
 
             Console.Write("Enter the quantity: ");
@@ -90,35 +90,41 @@ namespace VendingMachine
 
             if (totalPrice > 0)
             {
-                Console.WriteLine("===============================================");
+                Console.WriteLine("\n===============================================");
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("  Purchase successful!");
-                Console.WriteLine($"  Total Price: {totalPrice}");
+                Console.ResetColor();
+                Console.WriteLine($"  Total Price: {totalPrice:C}");
                 Console.WriteLine("===============================================");
             }
             else
             {
-                Console.WriteLine("Item not available or insufficient quantity.");
+                Console.WriteLine("\nItem not available or insufficient quantity.");
             }
         }
 
         private static void AddFunds()
         {
-            Console.Write("Enter the amount to add: ");
+            Console.Write("\nEnter the amount to add: ");
             decimal amount = decimal.Parse(GetUserInput());
 
             vendingMachine.AddFunds(amount);
 
-            Console.WriteLine("====================================================");
-            Console.WriteLine($"  Funds added successfully. Current balance: ${vendingMachine.GetBalance()}");
+            Console.WriteLine("\n====================================================");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"  Funds added successfully. Current balance: {vendingMachine.GetBalance():C}");
+            Console.ResetColor();
             Console.WriteLine("====================================================");
         }
 
         private static void ReturnChange()
         {
-            vendingMachine.ReturnChange();
+            decimal change = vendingMachine.ReturnChange();
 
-            Console.WriteLine("===============================================");
-            Console.WriteLine("  Change returned.");
+            Console.WriteLine("\n===============================================");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"  Change returned: {change:C}");
+            Console.ResetColor();
             Console.WriteLine("===============================================");
         }
 
@@ -179,9 +185,11 @@ namespace VendingMachine
             return balance;
         }
 
-        public void ReturnChange()
+        public decimal ReturnChange()
         {
+            decimal change = balance;
             balance = 0;
+            return change;
         }
     }
 
