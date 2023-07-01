@@ -6,6 +6,8 @@
 using System;
 using System.Collections.Generic;
 
+namespace RefreshmentDrinkSystem
+
 class Program
 {
     static void Main(string[] args)
@@ -15,31 +17,28 @@ class Program
     }
 }
 
-namespace RefreshmentDrinkSystem
+
 {
+    
     using System.Linq;
 
     public class RefreshmentDrinkSystem
     {
-        // Rest of the code for the RefreshmentDrinkSystem class
-        // ...
+       
     }
 
     public class Drink
     {
-        // Rest of the code for the Drink class
-        // ...
+       
     }
 
     public class OrderedItem
     {
-        // Rest of the code for the OrderedItem class
-        // ...
+       
     }
 
     public class Wallet
     {
-        // Rest of the code for the Wallet class
-        // ...
+        
     }
 }
