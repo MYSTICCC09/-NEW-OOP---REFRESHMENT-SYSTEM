@@ -13,9 +13,9 @@ namespace VendingMachine
             CreateDummyData();
 
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("==============================================");
+            Console.WriteLine("====================================================");
             Console.WriteLine("    Welcome to Andrei's Refreshment Drink System    ");
-            Console.WriteLine("==============================================");
+            Console.WriteLine("====================================================");
             Console.ResetColor();
 
             Console.WriteLine("1. Display Inventory");
@@ -56,19 +56,19 @@ namespace VendingMachine
         {
             List<Product> inventory = vendingMachine.GetInventory();
 
-            Console.WriteLine("\n==========================================================");
+            Console.WriteLine("\n===========================================================");
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("                    INVENTORY");
+            Console.WriteLine("                      INVENTORY");
             Console.ResetColor();
             
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("============================================================");
-            Console.WriteLine("   Good day sir!, eto po yung ating mga inumin na available ");
+            Console.WriteLine("   Robot voice: Eto po yung ating mga inumin na available ");
             Console.WriteLine("============================================================");
             Console.ResetColor();
             
             Console.WriteLine("============================================================");
-            Console.WriteLine("NAME                       ll                  QUANTITY");
+            Console.WriteLine("             (PRODUCTS AVAILABLE & QUANTITY)");
             Console.WriteLine("------------------------------------------------------------");
 
             foreach (Product product in inventory)
