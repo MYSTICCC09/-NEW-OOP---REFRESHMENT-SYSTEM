@@ -1,258 +1,201 @@
-// Submitted by: Andrei N. Capili BSCPE 1-1 (PUP - BC) //
-// ACTIVITY #3 - Object Oriented Programming //
-
 using System;
 using System.Collections.Generic;
 
-namespace RefreshmentSystem
+namespace VendingMachine
 {
-    class RefreshmentMachine
+    class Program
     {
-        private List<int> coinList = new List<int>();
-        private List<string> refreshmentList = new List<string>();
-        private List<int> priceList = new List<int>();
-        private int balance = 0;
+        static VendingMachine vendingMachine;
 
-        public void Run()
+        static void Main()
         {
-            InitializeVendingMachine();
+            vendingMachine = new VendingMachine();
+            CreateDummyData();
 
-            while (true)
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("==============================================");
+            Console.WriteLine("  Welcome to Andrei's Refreshment Drink System ");
+            Console.WriteLine("==============================================");
+            Console.ResetColor();
+
+            Console.WriteLine("1. Display Inventory");
+            Console.WriteLine("2. Purchase");
+            Console.WriteLine("3. Add Funds");
+            Console.WriteLine("4. Return Change");
+            Console.WriteLine("0. Exit");
+
+            string userInput = GetUserInput();
+
+            while (userInput != "0")
             {
-                Console.WriteLine();
-                Console.WriteLine("Welcome to Andrei's Refreshment Drinks System!");
-                Console.WriteLine("1. Insert coin");
-                Console.WriteLine("2. Purchase item");
-                Console.WriteLine("3. Check balance");
-                Console.WriteLine("4. Refill refreshments");
-                Console.WriteLine("5. Exit");
-                Console.WriteLine();
-
-                int choice = GetValidChoice();
-
-                switch (choice)
+                switch (userInput)
                 {
-                    case 1:
-                        InsertCoin();
+                    case "1":
+                        DisplayInventory();
                         break;
-
-                    case 2:
-                        PurchaseItem();
+                    case "2":
+                        Purchase();
                         break;
-
-                    case 3:
-                        CheckBalance();
+                    case "3":
+                        AddFunds();
                         break;
-
-                    case 4:
-                        RefillRefreshments();
+                    case "4":
+                        ReturnChange();
                         break;
-
-                    case 5:
-                        Console.WriteLine("Thank you for using Andrei's Refreshment Drinks System!");
-                        return;
+                    default:
+                        Console.WriteLine("Invalid choice. Please try again.");
+                        break;
                 }
+
+                Console.WriteLine("Enter your choice:");
+                userInput = GetUserInput();
             }
         }
 
-        private int GetValidChoice()
+        private static void DisplayInventory()
         {
-            int choice;
-            while (true)
+            List<Product> inventory = vendingMachine.GetInventory();
+
+            Console.WriteLine("===============================================");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("                INVENTORY");
+            Console.ResetColor();
+            Console.WriteLine("===============================================");
+            Console.WriteLine("NAME         QUANTITY");
+            Console.WriteLine("-----------------------------------------------");
+
+            foreach (Product product in inventory)
             {
-                Console.Write("Enter your choice: ");
-                if (int.TryParse(Console.ReadLine(), out choice) && choice >= 1 && choice <= 5)
-                {
-                    return choice;
-                }
-                Console.WriteLine("Invalid choice. Please try again.");
-                Console.WriteLine();
+                Console.WriteLine($"{product.Name}\t\t{product.Quantity}");
             }
+
+            Console.WriteLine("===============================================");
         }
 
-        private void InsertCoin()
+        private static string GetUserInput()
         {
-            Console.WriteLine("Please insert a coin (5, 10, 25, 50, 100, 200, 400, 600, 800, 1000)");
-            int coin = GetValidCoin();
-
-            coinList.Add(coin);
-            balance += coin;
-            Console.WriteLine("Current balance: " + balance + " cents");
+            Console.Write("User input > ");
+            return Console.ReadLine();
         }
 
-        private int GetValidCoin()
+        private static void Purchase()
         {
-            int coin;
-            while (true)
+            Console.Write("Enter the item you want to buy: ");
+            string itemName = GetUserInput();
+
+            Console.Write("Enter the quantity: ");
+            int quantity = int.Parse(GetUserInput());
+
+            decimal totalPrice = vendingMachine.Purchase(itemName, quantity);
+
+            if (totalPrice > 0)
             {
-                Console.Write("Enter the coin value: ");
-                if (int.TryParse(Console.ReadLine(), out coin) && IsValidCoin(coin))
-                {
-                    return coin;
-                }
-                Console.WriteLine("Invalid coin. Please try again.");
-                Console.WriteLine();
-            }
-        }
-
-        private void PurchaseItem()
-        {
-            if (refreshmentList.Count == 0)
-            {
-                Console.WriteLine("No refreshments available. Please refill the machine.");
-                return;
-            }
-
-            Console.WriteLine("Please select an item to purchase:");
-            Console.WriteLine();
-
-            for (int i = 0; i < refreshmentList.Count; i++)
-            {
-                Console.WriteLine($"{i + 1}. {refreshmentList[i]} - {priceList[i]} cents");
-            }
-
-            int item = GetValidItem();
-
-            if (IsValidItem(item))
-            {
-                string selectedItem = refreshmentList[item - 1];
-                int selectedPrice = priceList[item - 1];
-
-                Console.Write("Enter the quantity: ");
-                int quantity = GetValidQuantity();
-
-                int totalPrice = selectedPrice * quantity;
-
-                if (balance >= totalPrice)
-                {
-                    balance -= totalPrice;
-                    Console.WriteLine("Thank you for purchasing " + quantity + " " + selectedItem + "!");
-                    Console.WriteLine("Updated balance: " + balance + " cents");
-                }
-                else
-                {
-                    Console.WriteLine("Insufficient balance. Please insert more coins.");
-                }
+                Console.WriteLine("===============================================");
+                Console.WriteLine("  Purchase successful!");
+                Console.WriteLine($"  Total Price: {totalPrice}");
+                Console.WriteLine("===============================================");
             }
             else
             {
-                Console.WriteLine("Invalid item. Please try again.");
+                Console.WriteLine("Item not available or insufficient quantity.");
             }
         }
 
-        private int GetValidItem()
+        private static void AddFunds()
         {
-            int item;
-            while (true)
-            {
-                Console.Write("Enter the item number: ");
-                if (int.TryParse(Console.ReadLine(), out item) && IsValidItem(item))
-                {
-                    return item;
-                }
-                Console.WriteLine("Invalid item. Please try again.");
-                Console.WriteLine();
-            }
+            Console.Write("Enter the amount to add: ");
+            decimal amount = decimal.Parse(GetUserInput());
+
+            vendingMachine.AddFunds(amount);
+
+            Console.WriteLine("====================================================");
+            Console.WriteLine($"  Funds added successfully. Current balance: ${vendingMachine.GetBalance()}");
+            Console.WriteLine("====================================================");
         }
 
-        private int GetValidQuantity()
+        private static void ReturnChange()
         {
-            int quantity;
-            while (true)
-            {
-                if (int.TryParse(Console.ReadLine(), out quantity) && quantity >= 1)
-                {
-                    return quantity;
-                }
-                Console.WriteLine("Invalid quantity. Please try again.");
-                Console.WriteLine();
-            }
+            vendingMachine.ReturnChange();
+
+            Console.WriteLine("===============================================");
+            Console.WriteLine("  Change returned.");
+            Console.WriteLine("===============================================");
         }
 
-        private void CheckBalance()
+        static void CreateDummyData()
         {
-            Console.WriteLine("Current balance: " + balance + " cents");
-        }
-
-        private void RefillRefreshments()
-        {
-            refreshmentList.Clear();
-            priceList.Clear();
-
-            Console.WriteLine("Refreshing the vending machine...");
-            Console.WriteLine();
-
-            // Add new refreshments and prices
-            AddRefreshment("Tropical Tango-Mango Juice", 75);
-            AddRefreshment("Iced honey-blended calamansi Juice", 50);
-            AddRefreshment("Regular Water", 25);
-            AddRefreshment("Lemonade", 90);
-            AddRefreshment("Green Tea", 60);
-            AddRefreshment("Iced Coffee", 120);
-            AddRefreshment("Strawberry Shake", 85);
-            AddRefreshment("Chocolate Milk", 70);
-            AddRefreshment("Mint Mojito", 70);
-            AddRefreshment("Orange Soda", 80);
-            AddRefreshment("Apple Cider", 120);
-            AddRefreshment("Pineapple Smoothie", 170);
-            AddRefreshment("Grapefruit Juice", 125);
-            AddRefreshment("Peach Iced Tea", 120);
-            AddRefreshment("Blueberry Lemonade", 130);
-            AddRefreshment("Watermelon Slush", 150);
-            AddRefreshment("Coconut Water", 30);
-            AddRefreshment("Mango Lassi", 200);
-            AddRefreshment("Raspberry Soda", 110);
-
-            Console.WriteLine("Refreshments refilled successfully.");
-            Console.WriteLine();
-        }
-
-        private void AddRefreshment(string name, int price)
-        {
-            refreshmentList.Add(name);
-            priceList.Add(price);
-        }
-
-        private bool IsValidCoin(int coin)
-        {
-            return coin == 5 || coin == 10 || coin == 25 || coin == 50 || coin == 100 || coin == 200 || coin == 400 || coin == 600 || coin == 800 || coin == 1000;
-        }
-
-        private bool IsValidItem(int item)
-        {
-            return item >= 1 && item <= refreshmentList.Count;
-        }
-
-        private void InitializeVendingMachine()
-        {
-            AddRefreshment("Tropical Tango-Mango Juice", 75);
-            AddRefreshment("Iced honey-blended calamansi Juice", 50);
-            AddRefreshment("Regular Water", 25);
-            AddRefreshment("Lemonade", 90);
-            AddRefreshment("Green Tea", 60);
-            AddRefreshment("Iced Coffee", 120);
-            AddRefreshment("Strawberry Shake", 85);
-            AddRefreshment("Chocolate Milk", 70);
-            AddRefreshment("Mint Mojito", 70);
-            AddRefreshment("Orange Soda", 80);
-            AddRefreshment("Apple Cider", 120);
-            AddRefreshment("Pineapple Smoothie", 170);
-            AddRefreshment("Grapefruit Juice", 125);
-            AddRefreshment("Peach Iced Tea", 120);
-            AddRefreshment("Blueberry Lemonade", 130);
-            AddRefreshment("Watermelon Slush", 150);
-            AddRefreshment("Coconut Water", 30);
-            AddRefreshment("Mango Lassi", 200);
-            AddRefreshment("Raspberry Soda", 110);
+            vendingMachine.AddProduct(new Product("Coke", 2, 1.50m));
+            vendingMachine.AddProduct(new Product("Chips", 5, 0.75m));
+            vendingMachine.AddProduct(new Product("Candy", 10, 0.50m));
         }
     }
 
-    class Program
+    class VendingMachine
     {
-        static void Main(string[] args)
+        private List<Product> inventory;
+        private decimal balance;
+
+        public VendingMachine()
         {
-            RefreshmentMachine machine = new RefreshmentMachine();
-            machine.Run();
+            inventory = new List<Product>();
+            balance = 0;
+        }
+
+        public void AddProduct(Product product)
+        {
+            inventory.Add(product);
+        }
+
+        public List<Product> GetInventory()
+        {
+            return inventory;
+        }
+
+        public decimal Purchase(string itemName, int quantity)
+        {
+            Product product = inventory.Find(p => p.Name == itemName);
+
+            if (product != null && product.Quantity >= quantity)
+            {
+                decimal totalPrice = product.Price * quantity;
+                if (balance >= totalPrice)
+                {
+                    product.Quantity -= quantity;
+                    balance -= totalPrice;
+                    return totalPrice;
+                }
+            }
+
+            return 0;
+        }
+
+        public void AddFunds(decimal amount)
+        {
+            balance += amount;
+        }
+
+        public decimal GetBalance()
+        {
+            return balance;
+        }
+
+        public void ReturnChange()
+        {
+            balance = 0;
+        }
+    }
+
+    class Product
+    {
+        public string Name { get; set; }
+        public int Quantity { get; set; }
+        public decimal Price { get; set; }
+
+        public Product(string name, int quantity, decimal price)
+        {
+            Name = name;
+            Quantity = quantity;
+            Price = price;
         }
     }
 }
