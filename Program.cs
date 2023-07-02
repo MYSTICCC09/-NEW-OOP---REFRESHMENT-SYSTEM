@@ -1,4 +1,8 @@
-﻿using System;
+// Submitted by: Andrei N. Capili BSCPE 1-1 (PUP - BC) //
+// ACTIVITY #3 - Object Oriented Programming          //
+// FINAL PROJECT - MAIN CS. OOP REQUIREMENT          //
+
+using System;
 using System.Collections.Generic;
 
 namespace RefreshmentDrinkSystem
