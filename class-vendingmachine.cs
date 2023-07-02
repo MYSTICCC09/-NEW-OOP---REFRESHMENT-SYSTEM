@@ -1,3 +1,7 @@
+// Submitted by: Andrei N. Capili BSCPE 1-1 (PUP - BC) //
+// ACTIVITY #3 - Object Oriented Programming          //
+// FINAL PROJECT - class vendingm. OOP REQUIREMENT    //
+
 using System.Collections.Generic;
 
 namespace RefreshmentDrinkSystem
