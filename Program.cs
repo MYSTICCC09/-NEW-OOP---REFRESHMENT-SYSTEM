@@ -9,11 +9,11 @@ namespace RefreshmentDrinkSystem
 {
     class Program
     {
-        static VendingMachine vendingMachine = new VendingMachine();
+        static Menu vendingMachine = new Menu();
 
         static void Main()
         {
-            vendingMachine = new VendingMachine();
+            vendingMachine = new Menu();
             CreateDummyData();
 
             Console.ForegroundColor = ConsoleColor.Yellow;
