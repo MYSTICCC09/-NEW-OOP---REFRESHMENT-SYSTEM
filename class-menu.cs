@@ -1,17 +1,17 @@
-// Submitted by: Andrei N. Capili BSCPE 1-1 (PUP - BC) //
+/ Submitted by: Andrei N. Capili BSCPE 1-1 (PUP - BC) //
 // ACTIVITY #3 - Object Oriented Programming          //
-// FINAL PROJECT - class vendingm. OOP REQUIREMENT    //
+// FINAL PROJECT - class Menu. OOP REQUIREMENT    //
 
 using System.Collections.Generic;
 
 namespace RefreshmentDrinkSystem
 {
-    class VendingMachine
+    class Menu
     {
         private List<Drink> drinks;
         private decimal balance;
 
-        public VendingMachine()
+        public Menu()
         {
             drinks = new List<Drink>();
             balance = 0;
