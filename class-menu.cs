@@ -8,8 +8,8 @@ namespace RefreshmentDrinkSystem
 {
     class Menu
     {
-        private List<Drink> drinks;
-        private decimal balance;
+        public List<Drink> drinks;
+        public decimal balance;
 
         public Menu()
         {
