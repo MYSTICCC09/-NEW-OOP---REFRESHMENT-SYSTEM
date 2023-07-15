@@ -11,7 +11,7 @@ namespace RefreshmentDrinkSystem
     {
         static VendingMachine vendingMachine = new VendingMachine();
 
-        static void Main()
+        static void Main(string[] args)
         {
             vendingMachine = new VendingMachine();
             CreateDummyData();
