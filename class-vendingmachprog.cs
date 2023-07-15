@@ -1,17 +1,17 @@
 // Submitted by: Andrei N. Capili BSCPE 1-1 (PUP - BC) //
 // ACTIVITY #3 - Object Oriented Programming          //
-// FINAL PROJECT - class Menu. OOP REQUIREMENT       //
+// FINAL PROJECT - class vendingm. OOP REQUIREMENT    //
 
 using System.Collections.Generic;
 
 namespace RefreshmentDrinkSystem
 {
-    class Menu // not really a menu, more of like a vending machine to add available drinks and responsible for balance po.
+    class VendingMachine
     {
-        public List<Drink> drinks;
-        public decimal balance;
+        private List<Drink> drinks;
+        private decimal balance;
 
-        public Menu()
+        public VendingMachine()
         {
             drinks = new List<Drink>();
             balance = 0;
