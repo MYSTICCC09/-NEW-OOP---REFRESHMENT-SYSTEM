@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace RefreshmentDrinkSystem
 {
-    class Menu
+    class Menu // not really a menu, more of like a vending machine to add available drinks and responsible for balance po.
     {
         public List<Drink> drinks;
         public decimal balance;
