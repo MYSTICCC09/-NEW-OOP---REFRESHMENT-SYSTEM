@@ -7,6 +7,7 @@ using System.Collections.Generic;
 namespace RefreshmentDrinkSystem
 {
     class VendingMachine //vending machine inventory, available drinks & balance
+                         //allows to add more drinks po from the drinks available at main prog
     {
         private List<Drink> drinks;
         private decimal balance;
