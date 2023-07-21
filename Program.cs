@@ -14,7 +14,7 @@ namespace RefreshmentDrinkSystem
         static void Main(string[] args)
         {
             vendingMachine = new VendingMachine();
-            CreateDummyData();
+            CreateDummyData(); // kaya po nasa unahan na to kasi para maihanda na agad yung drinks na available sa system/
 
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("============================================================");
@@ -28,9 +28,11 @@ namespace RefreshmentDrinkSystem
             Console.WriteLine("4. Return Change");
             Console.WriteLine("0. Exit");
 
-            string userInput = GetUserInput();
+            string userInput = GetUserInput(); //  kung ano ta-type ng user sa console ay maiistore sa userInput
 
-            while (userInput != "0")
+            while (userInput != "0") // loop as long as tama input
+                                     // checks whether the value of userInput is not equal to the string "0".
+                                     // loop will keep running until the user enters "0" as their input.
             {
                 switch (userInput)
                 {
@@ -86,8 +88,9 @@ namespace RefreshmentDrinkSystem
 
             foreach (Drink drink in drinks)
             {
-                string type = drink.GetType().Name;
-                Console.WriteLine($"{drink.Name,-25} {type,-15} {drink.Quantity}");
+                string type = drink.GetType().Name; // to obtain its type as a System.Type object.
+                                                    // object to get the name of the type (i.e., the class name of the drink object).
+                Console.WriteLine($"{drink.Name,-25} {type,-15} {drink.Quantity}"); // alignment lang po pag ni run.
             }
 
             Console.WriteLine("===============================================");
@@ -100,9 +103,10 @@ namespace RefreshmentDrinkSystem
 
             Console.Write("Enter the quantity: ");
             int quantity;
-            bool isValidQuantity = int.TryParse(GetUserInput(), out quantity);
+            bool isValidQuantity = int.TryParse(GetUserInput(), out quantity); // If the conversion fails (e.g., the user entered non-numeric characters).
 
-            if (!isValidQuantity || quantity <= 0)
+            if (!isValidQuantity || quantity <= 0) // (||) is the logical OR operator sa gitna ng two conditions .
+                                                   // returns true if either of the conditions is true.
             {
                 Console.WriteLine("Invalid quantity. Please enter a positive integer.");
                 return;
