@@ -10,7 +10,7 @@ namespace RefreshmentDrinkSystem
         public int Quantity { get; set; }
         public decimal Price { get; set; }
 
-        public Drink(string name, int quantity, decimal price)
+        public Drink(string name, int quantity, decimal price) // Constructor
         {
             Name = name;
             Quantity = quantity;
@@ -20,21 +20,21 @@ namespace RefreshmentDrinkSystem
 
     class Juice : Drink
     {
-        public Juice(string name, int quantity, decimal price) : base(name, quantity, price)
+        public Juice(string name, int quantity, decimal price) : base(name, quantity, price) // Constructor
         {
         }
     }
 
     class Alcohol : Drink
     {
-        public Alcohol(string name, int quantity, decimal price) : base(name, quantity, price)
+        public Alcohol(string name, int quantity, decimal price) : base(name, quantity, price) // Constructor
         {
         }
     }
 
     class ChilledDrink : Drink
     {
-        public ChilledDrink(string name, int quantity, decimal price) : base(name, quantity, price)
+        public ChilledDrink(string name, int quantity, decimal price) : base(name, quantity, price) // Constructor
         {
         }
     }
