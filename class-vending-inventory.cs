@@ -34,14 +34,15 @@ namespace RefreshmentDrinkSystem
         {
             Drink drink = drinks.Find(d => d.Name == drinkName); // lambda expression - checks property of drinks in the list if equal to the parameter po.
 
-            if (drink != null && drink.Quantity >= quantity)
+            if (drink != null && drink.Quantity >= quantity) // para po ma check  yung (drink) variable if it contains a valid reference to a Drink object. 
+                                                             // if the drink is not null, it means a drink with the specified name was found in the drinks list.
             {
-                decimal totalPrice = drink.Price * quantity;
-                if (balance >= totalPrice)
+                decimal totalPrice = drink.Price * quantity; // calculates the total cost of the purchase
+                if (balance >= totalPrice)                   // para po ma sure if enough funds to make the purchase.
                 {
-                    drink.Quantity -= quantity;
-                    balance -= totalPrice;
-                    return totalPrice;
+                    drink.Quantity -= quantity;              // babawasan yung number of drinks available pag bumili
+                    balance -= totalPrice;                   // cost 
+                    return totalPrice;                       // return - pag successful ang purchase
                 }
             }
 
