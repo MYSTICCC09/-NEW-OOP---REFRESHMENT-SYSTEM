@@ -112,7 +112,8 @@ namespace RefreshmentDrinkSystem
                 return;
             }
 
-            decimal totalPrice = vendingMachine.PurchaseDrink(drinkName, quantity);
+            decimal totalPrice = vendingMachine.PurchaseDrink(drinkName, quantity); // indicates that method attempts to purchase a drink with the specified name and 
+                                                                                    // quantity from the vending machine. Let's break down the line:
 
             if (totalPrice > 0)
             {
@@ -135,7 +136,8 @@ namespace RefreshmentDrinkSystem
             decimal amount;
             bool isValidAmount = decimal.TryParse(GetUserInput(), out amount);
 
-            if (!isValidAmount || amount <= 0)
+            if (!isValidAmount || amount <= 0)     // (||) is the logical OR operator sa gitna ng two conditions .
+                                                   // returns true if either of the conditions is true.
             {
                 Console.WriteLine("Invalid amount. Please enter a positive number.");
                 return;
